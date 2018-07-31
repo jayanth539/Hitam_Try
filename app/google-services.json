@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "506217497298",
+    "firebase_url": "https://hitam2-4a676.firebaseio.com",
+    "project_id": "hitam2-4a676",
+    "storage_bucket": "hitam2-4a676.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506217497298:android:438dab504154a98f",
+        "android_client_info": {
+          "package_name": "com.example.mounika.hitam_try"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506217497298-nl59878rheaff70lqbdljqq7o1tnojn1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mounika.hitam_try",
+            "certificate_hash": "da113dd666c33bf8371e7692ed59b5d1d8083610"
+          }
+        },
+        {
+          "client_id": "506217497298-5rqda0n51gi6ql5dq5s7tt65bhffr89e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyh1-sVmRWbSomlxh3hP5DBNxPLKduodE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506217497298-5rqda0n51gi6ql5dq5s7tt65bhffr89e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
