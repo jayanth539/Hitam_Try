@@ -20,7 +20,9 @@
             android:name=".Nav_Draw"
             android:label="@string/title_activity_nav__draw"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".FeedbackActivity"></activity>
+        <activity android:name=".FeedbackActivity" />
+        <activity android:name=".AboutUsActivity" />
+        <activity android:name=".EPICSActivity"></activity>
     </application>
 
 </manifest>

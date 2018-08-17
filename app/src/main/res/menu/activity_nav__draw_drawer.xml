@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    tools:showIn="navigation_view"
+    >
 
     <group android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
             android:title="Import" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_About_us"
+            android:icon="@drawable/icons8_graduation_cap_24"
+            android:title="About Us" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_EPICS"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="EPICS" />
         <item
             android:id="@+id/nav_feedback"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/icons8_feedback_24"
             android:title="Feedback" />
 
 
         <item
                 android:id="@+id/nav_bus"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/icons8_bus_24"
                 android:title="Find My Bus" />
         <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_academics"
+                android:icon="@drawable/ic_baseline_calendar_today_24px"
+                android:title="Academics" />
 
     </group>
 

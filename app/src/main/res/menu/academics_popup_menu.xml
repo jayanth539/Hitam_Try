@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <item android:title="Programs"
+      android:icon="@drawable/icons8_training_24"
+      android:id="@+id/academic_programs"/>
+
+    <item android:title="Academic Calendar"
+        android:icon="@drawable/ic_baseline_calendar_today_24px"
+        android:id="@+id/academic_calendar"/>
+
+    <item android:title="NAAC"
+        android:icon="@drawable/ic_menu_camera"
+        android:id="@+id/NAAC"/>
+
+    <item android:title="Syllabus"
+        android:icon="@drawable/icons8_book_24"
+        android:id="@+id/Syllabus"/>
+
+
+
+</menu>

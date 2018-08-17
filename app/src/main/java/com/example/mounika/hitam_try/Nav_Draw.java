@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.PopupMenu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,9 +15,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.zip.Inflater;
+
 
 public class Nav_Draw extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,23 +87,28 @@ public class Nav_Draw extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(final MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
+        } else if (id == R.id.nav_About_us) {
+        startActivity(new Intent(Nav_Draw.this,AboutUsActivity.class));
+        } else if (id == R.id.nav_EPICS) {
+            startActivity(new Intent(Nav_Draw.this,EPICSActivity.class));
         } else if (id == R.id.nav_feedback) {
             startActivity(new Intent(Nav_Draw.this,FeedbackActivity.class
             ));
         } else if (id == R.id.nav_bus) {
 
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_academics) {
+
+           /* PopupMenu popupMenu = new PopupMenu(this,findViewById(R.id.nav_academics));
+            MenuInflater inflater = popupMenu.getMenuInflater();
+            inflater.inflate(R.menu.academics_popup_menu,popupMenu.getMenu());
+            popupMenu.show(); */
 
         }
 
