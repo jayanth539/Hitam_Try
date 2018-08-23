@@ -29,6 +29,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ProgressBar
+            android:id="@+id/splash_screen_progress_bar"
+            style="@android:style/Widget.Material.ProgressBar.Horizontal"
+            android:layout_width="197dp"
+            android:layout_height="91dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="88dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="52dp"
+            android:outlineAmbientShadowColor="#efb213"
+            android:outlineSpotShadowColor="#af0c32"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv"
+            tools:targetApi="lollipop" />
         <!-- <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
