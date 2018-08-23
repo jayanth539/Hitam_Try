@@ -1,10 +1,13 @@
 package com.example.mounika.hitam_try;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.PopupMenu;
+import android.text.InputType;
 import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,7 +19,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.mounika.hitam_try.BusTracking.BusActivity;
 
 import java.util.zip.Inflater;
 
@@ -102,8 +108,44 @@ public class Nav_Draw extends AppCompatActivity
             ));
         } else if (id == R.id.nav_bus) {
 
+            final int[] m_Text = new int[1];
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Enter The Bus Route");
+
+// Set up the input
+            final EditText input = new EditText(this);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            builder.setView(input);
+
+// Set up the buttons
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    m_Text[0] = Integer.valueOf(String.valueOf(input.getText()));
+                    if(m_Text[0] > 0 && m_Text[0]<12) {
+                        BusActivity activity = new BusActivity();
+                        activity.setBusRouteNumber(m_Text[0]);
+                        startActivity(new Intent(Nav_Draw.this,activity.getClass()));
+                    }else{
+                        Toast.makeText(Nav_Draw.this,"Enter Route Between 1 and 12",Toast.LENGTH_LONG).show();
+                    }
+                }
+
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.show();
+
 
         } else if (id == R.id.nav_academics) {
+
+            //startActivity(new Intent(Nav_Draw.this, BusActivity.class));
 
            /* PopupMenu popupMenu = new PopupMenu(this,findViewById(R.id.nav_academics));
             MenuInflater inflater = popupMenu.getMenuInflater();

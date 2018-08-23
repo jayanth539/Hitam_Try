@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mounika.hitam_try">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -23,7 +24,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".FeedbackActivity" />
         <activity android:name=".AboutUsActivity" />
-        <activity android:name=".EPICSActivity"></activity>
+        <activity android:name=".EPICSActivity" />
+        <activity android:name=".BusTracking.BusActivity"></activity>
     </application>
 
 </manifest>

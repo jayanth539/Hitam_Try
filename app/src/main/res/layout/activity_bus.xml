@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/vehicle_map"
+    tools:context=".BusTracking.BusActivity">
+
+    <Button
+        android:id="@+id/updateButton"
+        android:layout_width="199dp"
+        android:layout_height="65dp"
+        android:layout_marginLeft="104dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="64dp"
+        android:backgroundTint="#f11802"
+        android:drawableLeft="@drawable/ic_baseline_edit_location_24px"
+        android:text="Update Location"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/retrieveButton"
+        android:layout_width="195dp"
+        android:layout_height="59dp"
+        android:layout_marginLeft="108dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="44dp"
+        android:backgroundTint="#75fd05"
+        android:drawableLeft="@drawable/ic_baseline_my_location_24px"
+        android:text="Retrieve Location"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateButton" />
+
+</android.support.constraint.ConstraintLayout>
