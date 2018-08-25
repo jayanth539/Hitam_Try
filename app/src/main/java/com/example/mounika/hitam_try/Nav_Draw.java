@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.PopupMenu;
@@ -23,13 +24,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mounika.hitam_try.BusTracking.BusActivity;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.zip.Inflater;
 
 
 public class Nav_Draw extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+ FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +45,7 @@ public class Nav_Draw extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        firebaseAuth = FirebaseAuth.getInstance();
 
 
 
@@ -110,23 +117,24 @@ public class Nav_Draw extends AppCompatActivity
 
             final int[] m_Text = new int[1];
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
             builder.setTitle("Enter The Bus Route");
 
-// Set up the input
+           // Set up the input
             final EditText input = new EditText(this);
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+
+           // Specify the type of input expected;
+
             input.setInputType(InputType.TYPE_CLASS_NUMBER);
             builder.setView(input);
 
-// Set up the buttons
+            // Set up the buttons
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     m_Text[0] = Integer.valueOf(String.valueOf(input.getText()));
                     if(m_Text[0] > 0 && m_Text[0]<12) {
-                        BusActivity activity = new BusActivity();
-                        activity.setBusRouteNumber(m_Text[0]);
-                        startActivity(new Intent(Nav_Draw.this,activity.getClass()));
+                        checkPassword(m_Text[0]);
                     }else{
                         Toast.makeText(Nav_Draw.this,"Enter Route Between 1 and 12",Toast.LENGTH_LONG).show();
                     }
@@ -156,5 +164,43 @@ public class Nav_Draw extends AppCompatActivity
 
 
         return true;
+    }
+
+    private void checkPassword(final int Route) {
+        AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+        final EditText passw = new EditText(this);
+        passw.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_NUMBER_VARIATION_PASSWORD | InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD);
+
+        builder2.setView(passw);
+
+        builder2.setTitle("Enter The PassCode for Route " + Route);
+        final String email = "route" + Route + "@hitam.org";
+        builder2.setPositiveButton("OK",new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                          firebaseAuth.signInWithEmailAndPassword(email, String.valueOf(passw.getText())).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+
+                              @Override
+                              public void onComplete(@NonNull Task<AuthResult> task) {
+
+
+                                  if(task.isSuccessful()){
+                                      BusActivity activity = new BusActivity();
+                                      activity.setBusRouteNumber(Route);
+                                      Intent intent = new Intent(Nav_Draw.this,activity.getClass());
+                                      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                      startActivity(intent);
+                                  }else
+                                  {
+                                      Toast.makeText(getApplicationContext(),"The password is invalid or the user does not have a password",Toast.LENGTH_LONG).show();
+                                  }
+
+                              }
+                          });
+            }
+        });
+
+        builder2.show();
     }
 }
