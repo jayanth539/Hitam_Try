@@ -36,7 +36,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
         sendManualFeedback = (Button)findViewById(R.id.manualButton);
         dbreference = FirebaseDatabase.getInstance().getReference("Feedbacks");
-        dbreference.setValue("Hi,Hello");
+
         feedback_Type = (EditText)findViewById(R.id.feedback_type);
         Designation = (Spinner)findViewById(R.id.designation);
         Comp_desc = (EditText)findViewById(R.id.complaint);

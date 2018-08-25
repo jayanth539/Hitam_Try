@@ -23,6 +23,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class BusActivity extends AppCompatActivity implements View.OnClickListener{
 
+
     private int busRouteNumber;
     private FusedLocationProviderClient mFusedLocationClient;
     private DatabaseReference databaseReference;
@@ -38,6 +39,9 @@ public class BusActivity extends AppCompatActivity implements View.OnClickListen
 
     public void setBusRouteNumber(int busRouteNumber) {
         this.busRouteNumber = busRouteNumber;
+    }
+    public int getBusRouteNumber() {
+        return busRouteNumber;
     }
 
     @Override
@@ -77,24 +81,19 @@ public class BusActivity extends AppCompatActivity implements View.OnClickListen
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
                             // Logic to handle location object
-                         /*   String Latitude,Longitude;
-                            Latitude = Double.toString(location.getLatitude());
-                            Longitude = Double.toString(location.getLongitude());
 
 
-                            LocationObject locationObject = new LocationObject(Latitude,Longitude);
 
 
-                            Random random = new Random();
-                            int value= random.nextInt(10);
-                            String boss = "User " + String.valueOf(value) ;
-                            LocationObject object = new LocationObject();//this is my own location object
-                            object.setLongitude(location.getLongitude());//setting values
-                            object.setLatitude(location.getLatitude());
-                            object.setUserID("User Is " + String.valueOf(value)); */
+
+
+                           BusObject object = new BusObject();//this is my own location object
+                            object.setLongitude(String.valueOf(location.getLongitude()));//setting values
+                            object.setLatitude(String.valueOf(location.getLatitude()));
+
                             //String id = String.valueOf(value);
-                            String id = "some id";
-                            databaseReference.child(id).setValue(location.getLongitude());// ok ? .. retrieve function also
+                            String id =  String.valueOf(getBusRouteNumber());
+                            databaseReference.child(id).setValue(object);
                               Toast.makeText(getBaseContext(),"location captured",Toast.LENGTH_LONG).show();
                         }else{
                             Toast.makeText(getBaseContext(),"Location Not Captured",Toast.LENGTH_LONG).show();

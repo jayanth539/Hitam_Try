@@ -3,17 +3,17 @@ package com.example.mounika.hitam_try;
 
 public class FeedbackObject {
 
-    String Profession;
-    String FeedbackType;
-    String PersonName;
-    String CompDesc;
-    Float Rating;
+    private String Profession;
+    private String FeedbackType;
+    private String PersonName;
+    private String CompDesc;
+    private Float Rating;
 
     public FeedbackObject() {
 
     }
 
-    public FeedbackObject(String profession, String feedbackType, String personName, String compDesc, Float rating) {
+    FeedbackObject(String profession, String feedbackType, String personName, String compDesc, Float rating) {
         Profession = profession;
         FeedbackType = feedbackType;
         PersonName = personName;
