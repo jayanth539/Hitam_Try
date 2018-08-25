@@ -1,9 +1,10 @@
 package com.example.mounika.hitam_try.BusTracking;
 
-import android.app.Activity;
-import android.app.ActivityManager;
+
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,17 +15,19 @@ import com.example.mounika.hitam_try.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.util.Random;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class BusActivity extends AppCompatActivity implements View.OnClickListener{
 
 
-    private int busRouteNumber;
+    private static int busRouteNumber;
     private FusedLocationProviderClient mFusedLocationClient;
     private DatabaseReference databaseReference;
     @Override
@@ -38,7 +41,7 @@ public class BusActivity extends AppCompatActivity implements View.OnClickListen
     }
 
     public void setBusRouteNumber(int busRouteNumber) {
-        this.busRouteNumber = busRouteNumber;
+        BusActivity.busRouteNumber = busRouteNumber;
     }
     public int getBusRouteNumber() {
         return busRouteNumber;
@@ -49,10 +52,35 @@ public class BusActivity extends AppCompatActivity implements View.OnClickListen
         switch (view.getId()){
             case (R.id.updateButton):
                 updateLocation();
+                break;
+            case (R.id.retrieveButton):
 
         }
 
 
+    }
+
+    private void retrieveLocation() {
+        final DatabaseReference root = FirebaseDatabase.getInstance().getReference("Locations/Route "+ getBusRouteNumber());
+        root.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                BusObject route = dataSnapshot.getValue(BusObject.class);
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void drawMap(String latitude, String longitude) {
+        Intent mapsIntent = new Intent(Intent.ACTION_VIEW);
+        mapsIntent.setData(Uri.parse("geo:" + latitude + "," +longitude+ "?q="+ latitude + "," + longitude +"Bus is Here"));
+        startActivity(mapsIntent);
     }
 
     private void requestPermission() {
@@ -63,7 +91,7 @@ public class BusActivity extends AppCompatActivity implements View.OnClickListen
         //if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
         if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            // TODO: Consider calling
+
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
             Toast.makeText(getBaseContext(),"Location Not Captured,Permission Denied",Toast.LENGTH_LONG).show();
@@ -92,7 +120,7 @@ public class BusActivity extends AppCompatActivity implements View.OnClickListen
                             object.setLatitude(String.valueOf(location.getLatitude()));
 
                             //String id = String.valueOf(value);
-                            String id =  String.valueOf(getBusRouteNumber());
+                           String id =  "Route  " + getBusRouteNumber();
                             databaseReference.child(id).setValue(object);
                               Toast.makeText(getBaseContext(),"location captured",Toast.LENGTH_LONG).show();
                         }else{

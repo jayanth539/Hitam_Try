@@ -1,10 +1,10 @@
 package com.example.mounika.hitam_try.BusTracking;
 
 public class BusObject {
-    private String longitude,latitude;
+    private String longitude;
+    private  String latitude;
 
-    public BusObject() {
-    }
+
 
     public String getLongitude() {
         return longitude;
@@ -14,11 +14,13 @@ public class BusObject {
         this.longitude = longitude;
     }
 
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
     public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
+
 }

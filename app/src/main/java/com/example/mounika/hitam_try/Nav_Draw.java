@@ -134,7 +134,8 @@ public class Nav_Draw extends AppCompatActivity
                 public void onClick(DialogInterface dialog, int which) {
                     m_Text[0] = Integer.valueOf(String.valueOf(input.getText()));
                     if(m_Text[0] > 0 && m_Text[0]<12) {
-                        checkPassword(m_Text[0]);
+                        int no = m_Text[0];
+                        checkPassword(no);
                     }else{
                         Toast.makeText(Nav_Draw.this,"Enter Route Between 1 and 12",Toast.LENGTH_LONG).show();
                     }
@@ -189,7 +190,7 @@ public class Nav_Draw extends AppCompatActivity
                                       BusActivity activity = new BusActivity();
                                       activity.setBusRouteNumber(Route);
                                       Intent intent = new Intent(Nav_Draw.this,activity.getClass());
-                                      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    //  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                       startActivity(intent);
                                   }else
                                   {
