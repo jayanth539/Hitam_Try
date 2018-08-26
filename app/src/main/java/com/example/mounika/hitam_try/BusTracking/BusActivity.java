@@ -15,6 +15,9 @@ import com.example.mounika.hitam_try.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +41,7 @@ public class BusActivity extends AppCompatActivity implements View.OnClickListen
         databaseReference = FirebaseDatabase.getInstance().getReference("Locations");
         requestPermission();
         findViewById(R.id.updateButton).setOnClickListener(this);
+        findViewById(R.id.retrieveButton).setOnClickListener(this);
     }
 
     public void setBusRouteNumber(int busRouteNumber) {
@@ -54,25 +58,35 @@ public class BusActivity extends AppCompatActivity implements View.OnClickListen
                 updateLocation();
                 break;
             case (R.id.retrieveButton):
-
+                retrieveLocation();
+                break;
         }
 
 
     }
 
     private void retrieveLocation() {
-        final DatabaseReference root = FirebaseDatabase.getInstance().getReference("Locations/Route "+ getBusRouteNumber());
+
+        final DatabaseReference root = FirebaseDatabase.getInstance().getReference("Locations").child("Route"+getBusRouteNumber());
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+
                 BusObject route = dataSnapshot.getValue(BusObject.class);
 
+
+                if (route != null) {
+                    drawMap(route.getLatitude(), route.getLongitude());
+                }else{
+                    Toast.makeText(getBaseContext(), "The Route Location hasn't been updated yet", Toast.LENGTH_SHORT).show();
+                }
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Toast.makeText(getBaseContext(), databaseError.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -106,21 +120,22 @@ public class BusActivity extends AppCompatActivity implements View.OnClickListen
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
+
                         if (location != null) {
-                            // Logic to handle location object
-
-
-
-
-
-
-                           BusObject object = new BusObject();//this is my own location object
+                            BusObject object = new BusObject();//this is my own location object
                             object.setLongitude(String.valueOf(location.getLongitude()));//setting values
                             object.setLatitude(String.valueOf(location.getLatitude()));
 
-                            //String id = String.valueOf(value);
-                           String id =  "Route  " + getBusRouteNumber();
+                          // String id =  "Route  " + getBusRouteNumber();
+                           // FirebaseUser auth = FirebaseAuth.getInstance().getCurrentUser();
+                            String  id =  "Route" + getBusRouteNumber();
+
+                           /* if (auth != null) {
+                                id = auth.getUid();
+                            }
+                            else {
+
+                            } */
                             databaseReference.child(id).setValue(object);
                               Toast.makeText(getBaseContext(),"location captured",Toast.LENGTH_LONG).show();
                         }else{
